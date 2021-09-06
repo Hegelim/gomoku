@@ -9,7 +9,7 @@ def index(request):
 
 
 def board(request):
-    context = {'fill_here': 'some_variable'}
+    context = {'range': range(20)}
     return render(request, 'game/board.html', context)
 
 
