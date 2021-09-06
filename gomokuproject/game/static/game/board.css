@@ -2,9 +2,9 @@
     width: 35px;
     height: 35px;
     /*border-radius: 90%;*/
-    /*background: green;*/
     /*border: 1px solid black;*/
 }
+
 
 td.non-index {
     /*border-right: 1px solid grey;*/
@@ -14,6 +14,11 @@ td.non-index {
             linear-gradient(to right, grey 1px, transparent 1px),
             linear-gradient(to bottom, grey 1px, transparent 1px);
 }
+
+table {
+    margin-bottom: 50px;
+}
+
 
 td {
     width: 40px;
