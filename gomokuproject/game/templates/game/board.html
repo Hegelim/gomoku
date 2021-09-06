@@ -7,9 +7,11 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'game/board.css' %}">
+
 </head>
 <body>
     <h1 class="text-center">Welcome to Gomoku!</h1>
+    <p class="userpromt"></p>
     <div class="d-flex justify-content-center">
         <table>
             {% for i in range %}
@@ -24,7 +26,12 @@
                             <p class="mx-auto my-auto">{{ i }}</p>
                         </td>
                     {% else %}
-                        <td class="non-index"><button type='button' class="btn rounded-circle"></button></td>
+                        <td class="non-index">
+                            <button type='button'
+                                    class="btn rounded-circle"
+                                    id="{{ '(i,j)' }}">
+                            </button>
+                        </td>
                     {% endif %}
                 {% endfor %}
             </tr>

@@ -2,17 +2,22 @@
     width: 35px;
     height: 35px;
     /*border-radius: 90%;*/
-    /*background: grey;*/
+    /*background: green;*/
     /*border: 1px solid black;*/
+}
+
+td.non-index {
+    /*border-right: 1px solid grey;*/
+    /*border-bottom: 1px solid grey;*/
+    background-size: calc(700px / 36) calc(700px / 36);
+    background-image:
+            linear-gradient(to right, grey 1px, transparent 1px),
+            linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
 td {
     width: 40px;
     height: 40px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     text-align: center;
 }
-
-/*table {*/
-/*    border: 1px solid black;*/
-/*}*/
