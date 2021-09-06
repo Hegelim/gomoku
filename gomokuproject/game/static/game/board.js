@@ -1,6 +1,6 @@
 var button = document.querySelectorAll('button');
 var buttonLength = button.length;
-console.log(button);
+var counter = -1;
 
 // add click event to all buttons
 for (var i = 0; i < buttonLength; i++) {
@@ -16,5 +16,13 @@ function returnIndex() {
 
 // click and display
 function display() {
-    this.style.background = 'grey';
+    if (counter === -1) {
+        // white goes first
+        document.querySelector('h2').innerHTML = "Turn for white!";
+        this.style.background = 'black';
+    } else if (counter === 1) {
+        document.querySelector('h2').innerHTML = "Turn for black!";
+        this.style.background = 'white';
+    }
+    counter *= -1;
 }
