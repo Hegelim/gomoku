@@ -26,8 +26,10 @@ for (var i = 0; i < buttonLength; i++) {
 }
 
 // add back
-var backClass = document.querySelector(".back");
-backClass.addEventListener("click", back);
+document.querySelector(".back").addEventListener("click", back);
+
+// add clear
+document.querySelector("#clear").addEventListener("click", clear);
 
 // return current row index
 // starting at index 1
@@ -165,6 +167,21 @@ function back() {
     }
 }
 
+
+function clear() {
+    for (var i = playedStones.length; i > 0; i--) {
+        var stone = playedStones.pop();
+        var turn = turns.pop();
+        stone.style.background = "";
+        stone.style.border = "";
+        if (turn === "White") {
+            document.querySelector('h2').innerHTML = "Turn for white!";
+        } else {
+            document.querySelector('h2').innerHTML = "Turn for black!";
+        }
+        counter *= -1;
+    }
+}
 
 // click and display
 function play() {
