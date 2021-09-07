@@ -15,10 +15,11 @@ td.non-index {
             linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
-table {
-    margin-bottom: 50px;
+.board {
+    padding: 10px 20px 20px 10px;
+    background-color: #f1b06c;
+    margin-bottom: 40px;
 }
-
 
 td {
     width: 40px;
