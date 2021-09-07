@@ -3,6 +3,9 @@ const buttonLength = buttons.length; // 19 * 19 = 361
 var counter = -1;
 const ROW_LENGTH = 19;
 var buttonsArr = [];
+// the stones that have been put on the board
+var playedStones = [];
+var turns = [];
 
 // create an empty array to store all buttons
 // this is 20 by 20
@@ -21,6 +24,10 @@ for (var i = 0; i < buttonLength; i++) {
     // add event Listener
     buttons[i].addEventListener('click', play);
 }
+
+// add back
+var backClass = document.querySelector(".back");
+backClass.addEventListener("click", back);
 
 // return current row index
 // starting at index 1
@@ -141,6 +148,24 @@ function sameColor(s1, s2, s3, s4, s5) {
 }
 
 
+function back() {
+    if (playedStones.length > 0) {
+        var stone = playedStones.pop();
+        var turn = turns.pop();
+        stone.style.background = "";
+        stone.style.border = "";
+        if (turn === "White") {
+            document.querySelector('h2').innerHTML = "Turn for white!";
+        } else {
+            document.querySelector('h2').innerHTML = "Turn for black!";
+        }
+        counter *= -1;
+    } else {
+        alert("There are no stones to be removed!");
+    }
+}
+
+
 // click and display
 function play() {
     if (counter === -1) {
@@ -148,6 +173,8 @@ function play() {
         document.querySelector('h2').innerHTML = "Turn for black!";
         this.style.background = 'white';
         this.style.border = "1px solid grey";
+        playedStones.push(this);
+        turns.push("White");
         if (ifWin()) {
             document.querySelector('h2').innerHTML = "White wins!";
             alert("White Wins!");
@@ -156,6 +183,8 @@ function play() {
         document.querySelector('h2').innerHTML = "Turn for white!";
         this.style.background = 'black';
         this.style.border = "1px solid grey";
+        playedStones.push(this);
+        turns.push("Black");
         if (ifWin()) {
             document.querySelector('h2').innerHTML = "Black wins!";
             alert("Black Wins!");
