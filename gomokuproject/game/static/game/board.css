@@ -1,14 +1,20 @@
 .btn.rounded-circle {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     /*border-radius: 90%;*/
     /*border: 1px solid black;*/
 }
 
+table {
+    width: 800px;
+    height: 800px;
+}
+
 
 td.non-index {
-    /*border-right: 1px solid grey;*/
+    border-right: 1px solid grey;
     /*border-bottom: 1px solid grey;*/
+    /* this controls the grid width */
     background-size: calc(700px / 36) calc(700px / 36);
     background-image:
             linear-gradient(to right, grey 1px, transparent 1px),
@@ -18,7 +24,6 @@ td.non-index {
 .board {
     padding: 10px 20px 20px 10px;
     background-color: #f1b06c;
-    margin-bottom: 40px;
 }
 
 td {
@@ -26,4 +31,8 @@ td {
     height: 40px;
     /*border: 1px solid black;*/
     text-align: center;
+}
+
+.text-display {
+    padding: 20px;
 }
