@@ -174,28 +174,61 @@ function clear() {
     }
 }
 
+function isPlayed(stone) {
+    if (playedStones.length === 0) {
+        return false;
+    }
+    var prevStone = playedStones.at(-1);
+    if (stone.id === prevStone.id) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function modifyPrompt(prompt) {
+    if (prompt === "black") {
+        document.querySelector('h2').innerHTML = "Turn for black!";
+    } else {
+        document.querySelector('h2').innerHTML = "Turn for white!";
+    }
+}
+
+
 // click and display
 function play() {
     if (counter === -1) {
-        // white goes first
-        document.querySelector('h2').innerHTML = "Turn for black!";
-        this.style.background = 'white';
-        this.style.border = "1px solid grey";
-        playedStones.push(this);
-        turns.push("White");
-        if (ifWin()) {
-            document.querySelector('h2').innerHTML = "White wins!";
-            alert("White Wins!");
+        modifyPrompt("black");
+        // check if this button has same coordinates as the previous one
+        if (isPlayed(this)) {
+            alert("This position has been occupied!");
+            modifyPrompt("white");
+            return 0;
+        } else {
+            this.style.background = 'white';
+            this.style.border = "1px solid grey";
+            playedStones.push(this);
+            turns.push("White");
+            if (ifWin()) {
+                document.querySelector('h2').innerHTML = "White wins!";
+                alert("White Wins!");
+            }
         }
     } else if (counter === 1) {
-        document.querySelector('h2').innerHTML = "Turn for white!";
-        this.style.background = 'black';
-        this.style.border = "1px solid grey";
-        playedStones.push(this);
-        turns.push("Black");
-        if (ifWin()) {
-            document.querySelector('h2').innerHTML = "Black wins!";
-            alert("Black Wins!");
+        modifyPrompt("white");
+        if (isPlayed(this)) {
+            alert("This position has been occupied!");
+            modifyPrompt("black");
+            return 0;
+        } else {
+            this.style.background = 'black';
+            this.style.border = "1px solid grey";
+            playedStones.push(this);
+            turns.push("Black");
+            if (ifWin()) {
+                document.querySelector('h2').innerHTML = "Black wins!";
+                alert("Black Wins!");
+            }
         }
     }
     counter *= -1;
