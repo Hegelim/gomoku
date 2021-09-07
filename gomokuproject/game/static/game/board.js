@@ -26,7 +26,7 @@ for (var i = 0; i < buttonLength; i++) {
 }
 
 // add back
-document.querySelector(".back").addEventListener("click", back);
+document.querySelector("#back").addEventListener("click", back);
 
 // add clear
 document.querySelector("#clear").addEventListener("click", clear);
@@ -170,16 +170,7 @@ function back() {
 
 function clear() {
     for (var i = playedStones.length; i > 0; i--) {
-        var stone = playedStones.pop();
-        var turn = turns.pop();
-        stone.style.background = "";
-        stone.style.border = "";
-        if (turn === "White") {
-            document.querySelector('h2').innerHTML = "Turn for white!";
-        } else {
-            document.querySelector('h2').innerHTML = "Turn for black!";
-        }
-        counter *= -1;
+        back.call(document.getElementById("back"));
     }
 }
 
