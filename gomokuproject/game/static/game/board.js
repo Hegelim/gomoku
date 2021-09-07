@@ -2,16 +2,28 @@ var buttons = document.querySelectorAll('button');
 const buttonLength = buttons.length; // 19 * 19 = 361
 var counter = -1;
 const ROW_LENGTH = 19;
+var buttonsArr = [];
+
+// create an empty array to store all buttons
+// this is 20 by 20
+for (var i = 0; i < ROW_LENGTH + 1; i++) {
+    buttonsArr[i] = new Array(ROW_LENGTH + 1);
+}
 
 // add click event to all buttons
 for (var i = 0; i < buttonLength; i++) {
     // assign coordinates to all buttons
     buttons[i].id = assignId(i+1);
+    // add button to buttonArry
+    var row = getRowIndex(i+1);
+    var col = getColIndex(i+1);
+    buttonsArr[row][col] = buttons[i];
+    // add event Listener
     buttons[i].addEventListener('click', play);
 }
 
 // return current row index
-// starting at index 0
+// starting at index 1
 function getRowIndex(i) {
     var rowIndex = 1;
     while (i > ROW_LENGTH) {
@@ -21,7 +33,8 @@ function getRowIndex(i) {
     return rowIndex;
 }
 
-// get column index
+// get column index, human-readable
+// consistent with the board, starting at 1
 function getColIndex(i) {
     if (i % ROW_LENGTH === 0) {
         return ROW_LENGTH;
@@ -47,8 +60,8 @@ function ifWin() {
 }
 
 function ifWinHorizontal() {
-    for (var i = 0; i < ROW_LENGTH; i++) {
-        for (var j = 0; j < ROW_LENGTH; j++) {
+    for (var i = 1; i < ROW_LENGTH + 1; i++) {
+        for (var j = 1; j < ROW_LENGTH + 1; j++) {
             if (sameColor(
                 getButton(i,j),
                 getButton(i,j+1),
@@ -63,8 +76,8 @@ function ifWinHorizontal() {
 }
 
 function ifWinVertical() {
-    for (var i = 0; i < ROW_LENGTH; i++) {
-        for (var j = 0; j < ROW_LENGTH; j++) {
+    for (var i = 1; i < ROW_LENGTH + 1; i++) {
+        for (var j = 1; j < ROW_LENGTH + 1; j++) {
             if (sameColor(getButton(i,j), getButton(i+1,j),
                 getButton(i+2, j), getButton(i+3, j), getButton(i+4, j))) {
                 return true;
@@ -75,8 +88,8 @@ function ifWinVertical() {
 }
 
 function ifWinDiagonal() {
-    for (var i = 0; i < ROW_LENGTH; i++) {
-        for (var j = 0; j < ROW_LENGTH; j++) {
+    for (var i = 1; i < ROW_LENGTH + 1; i++) {
+        for (var j = 1; j < ROW_LENGTH + 1; j++) {
             if (sameColor(
                 getButton(i,j),
                 getButton(i+1,j+1),
@@ -99,24 +112,10 @@ function ifWinDiagonal() {
 
 
 function getButton(r, c) {
-    for (var i = 0; i < buttonLength; i++) {
-        if (getRow(buttons[i]) === r
-            && getCol(buttons[i]) === c) {
-            return buttons[i];
-        }
+    if (r < 1 || r > ROW_LENGTH || c < 1 || c > ROW_LENGTH) {
+        return undefined;
     }
-}
-
-function getRow(button) {
-    var leftP = button.id.indexOf('(');
-    var comma = button.id.indexOf(',');
-    return parseInt(button.id.substring(leftP+1, comma));
-}
-
-function getCol(button) {
-    var comma = button.id.indexOf(',');
-    var rightP = button.id.indexOf(')');
-    return parseInt(button.id.substring(comma+1, rightP));
+    return buttonsArr[r][c];
 }
 
 
@@ -149,7 +148,6 @@ function play() {
         document.querySelector('h2').innerHTML = "Turn for black!";
         this.style.background = 'white';
         this.style.border = "1px solid grey";
-        // alert(this.id);
         if (ifWin()) {
             document.querySelector('h2').innerHTML = "White wins!";
             alert("White Wins!");
@@ -158,7 +156,6 @@ function play() {
         document.querySelector('h2').innerHTML = "Turn for white!";
         this.style.background = 'black';
         this.style.border = "1px solid grey";
-        // alert(this.id);
         if (ifWin()) {
             document.querySelector('h2').innerHTML = "Black wins!";
             alert("Black Wins!");
